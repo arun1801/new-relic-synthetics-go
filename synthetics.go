@@ -32,7 +32,7 @@ const (
 )
 
 var (
-	monitorURL = regexp.MustCompile(`^https://synthetics.newrelic.com/synthetics/api/v3/monitors/(.+)$`)
+	monitorURL = regexp.MustCompile(`^https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors/(.+)$`)
 
 	// ErrMonitorNotFound is returned when a monitor can't be
 	// found.
@@ -139,7 +139,7 @@ type GetAllMonitorsResponse struct {
 // account. Values of -1 indicate to use the defaults.
 func (c *Client) GetAllMonitors(offset, limit uint) (*GetAllMonitorsResponse, error) {
 	requestFunc := func() (*http.Request, error) {
-		url, err := url.Parse("https://synthetics.newrelic.com/synthetics/api/v3/monitors")
+		url, err := url.Parse("https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors")
 		if err != nil {
 			return nil, err
 		}
@@ -221,7 +221,7 @@ func (c *Client) GetMonitor(id string) (*Monitor, error) {
 	requestFunc := func() (*http.Request, error) {
 		request, err := c.getRequest(
 			"GET",
-			fmt.Sprintf("https://synthetics.newrelic.com/synthetics/api/v3/monitors/%s", id),
+			fmt.Sprintf("https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors/%s", id),
 			nil,
 		)
 		if err != nil {
@@ -327,7 +327,7 @@ func (c *Client) CreateMonitor(m *CreateMonitorArgs) (*Monitor, error) {
 
 		request, err := c.getRequest(
 			"POST",
-			"https://synthetics.newrelic.com/synthetics/api/v3/monitors",
+			"https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors",
 			reqBody,
 		)
 		if err != nil {
@@ -417,7 +417,7 @@ func (c *Client) UpdateMonitor(id string, args *UpdateMonitorArgs) (*Monitor, er
 		}
 		request, err := c.getRequest(
 			"PATCH",
-			fmt.Sprintf("https://synthetics.newrelic.com/synthetics/api/v3/monitors/%s", id),
+			fmt.Sprintf("https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors/%s", id),
 			reqBody,
 		)
 		if err != nil {
@@ -455,7 +455,7 @@ func (c *Client) DeleteMonitor(id string) error {
 	requestFunc := func() (*http.Request, error) {
 		request, err := c.getRequest(
 			"DELETE",
-			fmt.Sprintf("https://synthetics.newrelic.com/synthetics/api/v3/monitors/%s", id),
+			fmt.Sprintf("https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors/%s", id),
 			nil,
 		)
 		if err != nil {
@@ -514,7 +514,7 @@ func (c *Client) UpdateMonitorScript(id string, args *UpdateMonitorScriptArgs) e
 		}
 		request, err := c.getRequest(
 			"PUT",
-			fmt.Sprintf("https://synthetics.newrelic.com/synthetics/api/v3/monitors/%s/script", id),
+			fmt.Sprintf("https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors/%s/script", id),
 			reqBody,
 		)
 		if err != nil {
@@ -547,7 +547,7 @@ func (c *Client) GetMonitorScript(id string) (string, error) {
 	requestFunc := func() (*http.Request, error) {
 		request, err := c.getRequest(
 			"GET",
-			fmt.Sprintf("https://synthetics.newrelic.com/synthetics/api/v3/monitors/%s/script", id),
+			fmt.Sprintf("https://synthetics.eu.newrelic.com/synthetics/api/v3/monitors/%s/script", id),
 			nil,
 		)
 		if err != nil {
@@ -621,7 +621,7 @@ func (c *Client) CreateAlertCondition(policyID uint, args *CreateAlertConditionA
 		}
 		request, err := c.getRequest(
 			"POST",
-			fmt.Sprintf("https://api.newrelic.com/v2/alerts_synthetics_conditions/policies/%d.json", policyID),
+			fmt.Sprintf("https://api.eu.newrelic.com/v2/alerts_synthetics_conditions/policies/%d.json", policyID),
 			requestBuf,
 		)
 		if err != nil {
@@ -678,7 +678,7 @@ func (c *Client) UpdateAlertCondition(alertConditionID uint, args *UpdateAlertCo
 		}
 		request, err := c.getRequest(
 			"PUT",
-			fmt.Sprintf("https://api.newrelic.com/v2/alerts_synthetics_conditions/%d.json", alertConditionID),
+			fmt.Sprintf("https://api.eu.newrelic.com/v2/alerts_synthetics_conditions/%d.json", alertConditionID),
 			requestBuf,
 		)
 		if err != nil {
@@ -718,7 +718,7 @@ func (c *Client) DeleteAlertCondition(alertConditionID uint) error {
 	requestFunc := func() (*http.Request, error) {
 		request, err := c.getRequest(
 			"DELETE",
-			fmt.Sprintf("https://api.newrelic.com/v2/alerts_synthetics_conditions/%d.json", alertConditionID),
+			fmt.Sprintf("https://api.eu.newrelic.com/v2/alerts_synthetics_conditions/%d.json", alertConditionID),
 			nil,
 		)
 		if err != nil {
@@ -750,7 +750,7 @@ func (c *Client) GetAlertCondition(policyID, alertConditionID uint) (*AlertCondi
 	requestFunc := func() (*http.Request, error) {
 		request, err := c.getRequest(
 			"GET",
-			fmt.Sprintf("https://api.newrelic.com/v2/alerts_synthetics_conditions.json?policy_id=%d", policyID),
+			fmt.Sprintf("https://api.eu.newrelic.com/v2/alerts_synthetics_conditions.json?policy_id=%d", policyID),
 			nil,
 		)
 		if err != nil {
