@@ -17,7 +17,7 @@ import (
 
 	"net/url"
 
-	"github.com/dollarshaveclub/new-relic-synthetics-go/util"
+	"github.com/arun1801/new-relic-synthetics-go/util"
 	"github.com/pkg/errors"
 )
 
